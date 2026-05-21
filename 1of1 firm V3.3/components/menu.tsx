@@ -140,8 +140,57 @@ export default function Menu({ onNavigate }: MenuProps) {
       </section>
 
       {/* Bottom Bar */}
-      <footer className="py-6 px-4 text-center border-t border-white/10">
-        <p className="text-white/30 text-xs tracking-wider">© 2026 1 OF 1 FIRM. All rights reserved.</p>
+      <footer className="py-8 px-4 border-t border-white/10">
+        <div className="max-w-4xl mx-auto">
+          {/* Social Links */}
+          <div className="flex flex-wrap justify-center gap-6 mb-6">
+            <a 
+              href="https://instagram.com/1of1firm" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white/50 hover:text-amber-500 transition-colors text-xs tracking-[0.2em]"
+            >
+              INSTAGRAM
+            </a>
+            <a 
+              href="https://youtube.com/@1of1firm" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white/50 hover:text-amber-500 transition-colors text-xs tracking-[0.2em]"
+            >
+              YOUTUBE
+            </a>
+            <a 
+              href="https://tiktok.com/@1of1firm" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white/50 hover:text-amber-500 transition-colors text-xs tracking-[0.2em]"
+            >
+              TIKTOK
+            </a>
+            <a 
+              href="https://wa.me/573001234567" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white/50 hover:text-amber-500 transition-colors text-xs tracking-[0.2em]"
+            >
+              WHATSAPP
+            </a>
+          </div>
+
+          {/* Email */}
+          <div className="text-center mb-6">
+            <a 
+              href="mailto:contact@1of1firm.com"
+              className="text-amber-500 hover:text-amber-400 transition-colors text-xs tracking-[0.15em]"
+            >
+              contact@1of1firm.com
+            </a>
+          </div>
+
+          {/* Copyright */}
+          <p className="text-white/30 text-xs tracking-wider text-center">© 2026 1 OF 1 FIRM. All rights reserved.</p>
+        </div>
       </footer>
     </div>
   )
