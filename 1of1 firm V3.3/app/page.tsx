@@ -15,9 +15,10 @@ import CampDetail from "@/components/camp-detail"
 import MaisonSwimDetail from "@/components/maison-swim-detail"
 import GoldenBackstageDetail from "@/components/golden-backstage-detail"
 import BuyTicketsDetail from "@/components/buy-tickets-detail"
+import ContactDetail from "@/components/contact-detail"
 
 export default function Home() {
-  const [currentPage, setCurrentPage] = useState<"home" | "events" | "babadook" | "luna-llena" | "la-festa" | "animal" | "celestial" | "championship" | "drip" | "vision-gallery" | "camp" | "maison-swim" | "golden-backstage" | "buy-tickets">("home")
+  const [currentPage, setCurrentPage] = useState<"home" | "events" | "babadook" | "luna-llena" | "la-festa" | "animal" | "celestial" | "championship" | "drip" | "vision-gallery" | "camp" | "maison-swim" | "golden-backstage" | "buy-tickets" | "contact">("home")
 
   const handleNavigate = (page: string) => {
     if (page === "events") {
@@ -46,6 +47,8 @@ export default function Home() {
       setCurrentPage("golden-backstage")
     } else if (page === "buy-tickets") {
       setCurrentPage("buy-tickets")
+    } else if (page === "contact") {
+      setCurrentPage("contact")
     } else {
       setCurrentPage("home")
     }
@@ -143,6 +146,14 @@ export default function Home() {
     return (
       <div>
         <BuyTicketsDetail onNavigate={handleNavigate} />
+      </div>
+    )
+  }
+
+  if (currentPage === "contact") {
+    return (
+      <div>
+        <ContactDetail onNavigate={handleNavigate} />
       </div>
     )
   }

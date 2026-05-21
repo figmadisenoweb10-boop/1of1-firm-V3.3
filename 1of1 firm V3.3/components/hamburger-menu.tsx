@@ -166,7 +166,10 @@ export default function HamburgerMenu({ isOpen, onClose, onNavigate, currentPage
 
             {/* CONTACT */}
             <button
-              className="block w-full text-lg md:text-3xl tracking-[0.2em] text-white font-light italic hover:text-amber-500 transition-colors"
+              onClick={() => handleNavigate("contact")}
+              className={`block w-full text-lg md:text-3xl tracking-[0.2em] font-light italic transition-colors ${
+                currentPage === "contact" ? "text-amber-500" : "text-white hover:text-amber-500"
+              }`}
             >
               CONTACT
             </button>
