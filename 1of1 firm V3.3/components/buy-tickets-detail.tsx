@@ -17,6 +17,11 @@ interface WeekendEvent {
   subtitleStyle: "script" | "italic"
   description: string[]
   time: string
+  date: string
+  venue: string
+  location: string
+  ageRestriction: string
+  ageNote: string
   buttonText: string
   buttonStyle: "outline" | "filled"
   image: string
@@ -35,6 +40,11 @@ export default function BuyTicketsDetail({ onNavigate }: BuyTicketsDetailProps) 
       subtitleStyle: "script",
       description: ["LA EXPERIENCIA", "QUE NUNCA OLVIDAS"],
       time: "9:00 PM",
+      date: "VIERNES 16 DE MAYO",
+      venue: "DISCOLO NIGHT CLUB",
+      location: "BARRANQUILLA",
+      ageRestriction: "+14",
+      ageNote: "MÁS SALVAJE. +14 SIN ALCOHOL",
       buttonText: "COMPRAR",
       buttonStyle: "outline",
       image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&q=80"
@@ -48,6 +58,11 @@ export default function BuyTicketsDetail({ onNavigate }: BuyTicketsDetailProps) 
       subtitleStyle: "italic",
       description: ["VIVE EL FIN DE SEMANA", "COMO NUNCA"],
       time: "9:00 PM",
+      date: "SÁBADO 17 DE MAYO",
+      venue: "DISCOLO NIGHT CLUB",
+      location: "BARRANQUILLA",
+      ageRestriction: "+14",
+      ageNote: "MÁS SALVAJE. +14 SIN ALCOHOL",
       buttonText: "COMPRAR",
       buttonStyle: "outline",
       image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80"
@@ -61,6 +76,11 @@ export default function BuyTicketsDetail({ onNavigate }: BuyTicketsDetailProps) 
       subtitleStyle: "script",
       description: ["REVIVE LA EXPERIENCIA", "COMO SI ESTUVIERAS AHÍ"],
       time: "8:00 PM",
+      date: "DOMINGO 18 DE MAYO",
+      venue: "DISCOLO NIGHT CLUB",
+      location: "BARRANQUILLA",
+      ageRestriction: "+14",
+      ageNote: "MÁS SALVAJE. +14 SIN ALCOHOL",
       buttonText: "VER MÁS",
       buttonStyle: "filled",
       image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80"
@@ -177,6 +197,24 @@ export default function BuyTicketsDetail({ onNavigate }: BuyTicketsDetailProps) 
                   {event.description.map((line, idx) => (
                     <p key={idx}>{line}</p>
                   ))}
+                </div>
+
+                {/* Event Info: Date, Venue, Location, Age */}
+                <div className="flex flex-wrap items-center gap-3 mb-4 text-xs text-white/60">
+                  <div className="flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-amber-500/70" />
+                    <span className="tracking-wider">{event.date}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-amber-500/70" />
+                    <span className="tracking-wider">{event.venue}, {event.location}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-5 h-5 rounded-full border border-amber-500/50 flex items-center justify-center text-[10px] font-bold text-amber-500">
+                      {event.ageRestriction}
+                    </span>
+                    <span className="tracking-wider text-white/50">{event.ageNote}</span>
+                  </div>
                 </div>
 
                 {/* Time and Button */}
