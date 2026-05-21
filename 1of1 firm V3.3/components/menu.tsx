@@ -9,11 +9,13 @@ interface MenuSectionProps {
   subtitle: string
   backgroundImage: string
   hasGoldBorder?: boolean
+  onClick?: () => void
 }
 
-function MenuSection({ title, subtitle, backgroundImage, hasGoldBorder = true }: MenuSectionProps) {
+function MenuSection({ title, subtitle, backgroundImage, hasGoldBorder = true, onClick }: MenuSectionProps) {
   return (
     <div
+      onClick={onClick}
       className={`relative min-h-[140px] flex items-center overflow-hidden group cursor-pointer ${
         hasGoldBorder ? "border-l-2 border-amber-500" : ""
       }`}
@@ -107,24 +109,28 @@ export default function Menu({ onNavigate }: MenuProps) {
           title="SIGNATURE EVENTS"
           subtitle="DISCOVER"
           backgroundImage="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=70"
+          onClick={() => handleNavigate("events")}
         />
 
         <MenuSection
           title="1 OF 1 UNIVERSE"
           subtitle="EXPLORE"
           backgroundImage="https://images.unsplash.com/photo-1574391884720-bbc3740c59d1?w=800&q=70"
+          onClick={() => handleNavigate("drip")}
         />
 
         <MenuSection
           title="BUY TICKETS / BOOK VIP"
           subtitle="GET ACCESS"
           backgroundImage="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=800&q=70"
+          onClick={() => handleNavigate("buy-tickets")}
         />
 
         <MenuSection
           title="CONTACT"
           subtitle="CONNECT"
           backgroundImage="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=70"
+          onClick={() => handleNavigate("contact")}
         />
       </section>
 
@@ -134,7 +140,10 @@ export default function Menu({ onNavigate }: MenuProps) {
         <p className="text-white/60 text-xs tracking-[0.3em] uppercase">This is not for everyone.</p>
         <p className="text-amber-500 text-sm tracking-[0.4em] mt-2">#1UNIQUEEXPERIENCE</p>
 
-        <button className="mt-8 px-12 py-3 border border-amber-500 text-amber-500 text-sm tracking-widest hover:bg-amber-500 hover:text-black transition-all duration-300">
+        <button 
+          onClick={() => handleNavigate("buy-tickets")}
+          className="mt-8 px-12 py-3 border border-amber-500 text-amber-500 text-sm tracking-widest hover:bg-amber-500 hover:text-black transition-all duration-300"
+        >
           GET ACCESS
         </button>
       </section>
