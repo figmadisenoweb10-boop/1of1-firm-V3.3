@@ -190,7 +190,7 @@ export default function BuyTicketsDetail({ onNavigate }: BuyTicketsDetailProps) 
                     className={`px-6 py-2 text-sm tracking-[0.15em] transition-all ${
                       event.buttonStyle === "filled"
                         ? "bg-gradient-to-r from-amber-600 to-amber-500 text-black font-medium hover:from-amber-500 hover:to-amber-400"
-                        : "border border-white/30 text-white hover:border-amber-500 hover:text-amber-500"
+                        : "border border-amber-500 text-amber-500"
                     }`}
                   >
                     {event.buttonText}
