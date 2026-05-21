@@ -236,11 +236,13 @@ export default function SignatureEvents({ onNavigate }: SignatureEventsProps) {
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 md:p-6 bg-gradient-to-b from-black/80 to-transparent">
-        <img 
-          src="/logo.png" 
-          alt="1 OF 1 FIRM" 
-          className="h-10 md:h-12 w-auto"
-        />
+        <button onClick={() => handleNavigate("home")} className="cursor-pointer">
+          <img 
+            src="/logo.png" 
+            alt="1 OF 1 FIRM" 
+            className="h-10 md:h-12 w-auto"
+          />
+        </button>
         <button
           onClick={() => setIsMenuOpen(true)}
           className="text-white p-2 hover:text-amber-500 transition-colors"

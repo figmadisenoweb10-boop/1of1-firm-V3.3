@@ -52,11 +52,13 @@ export default function HamburgerMenu({ isOpen, onClose, onNavigate, currentPage
       <div className="relative z-10 h-full flex flex-col">
         {/* Menu Header */}
         <div className="flex items-center justify-between p-4 md:p-6">
-          <img 
-            src="/logo.png" 
-            alt="1 OF 1 FIRM" 
-            className="h-10 md:h-12 w-auto"
-          />
+          <button onClick={() => handleNavigate("home")} className="cursor-pointer">
+            <img 
+              src="/logo.png" 
+              alt="1 OF 1 FIRM" 
+              className="h-10 md:h-12 w-auto"
+            />
+          </button>
           <button
             onClick={onClose}
             className="text-white p-2 hover:text-amber-500 transition-colors"
