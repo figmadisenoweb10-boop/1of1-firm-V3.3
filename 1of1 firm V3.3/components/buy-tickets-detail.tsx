@@ -494,7 +494,7 @@ export default function BuyTicketsDetail({ onNavigate }: BuyTicketsDetailProps) 
       </main>
 
       {/* Fixed Bottom Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/10 p-4 md:p-6">
+      <div className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/10 p-4 md:p-6 pt-[14px]">
         <div className="max-w-3xl mx-auto">
           <button className="w-full bg-amber-700/80 hover:bg-amber-600 text-white py-4 text-sm tracking-[0.2em] transition-colors mb-3">
             CONTINUE TO CHECKOUT ({totalTickets} TICKETS)
