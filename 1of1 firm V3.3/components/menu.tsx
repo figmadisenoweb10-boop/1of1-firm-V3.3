@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown, ChevronRight, Menu as MenuIcon } from "lucide-react"
+import { ChevronDown, ChevronRight, ChevronUp, Menu as MenuIcon } from "lucide-react"
 import HamburgerMenu from "./hamburger-menu"
 
 interface MenuSectionProps {
@@ -9,10 +9,12 @@ interface MenuSectionProps {
   subtitle: string
   backgroundImage: string
   hasGoldBorder?: boolean
+  isExpanded?: boolean
+  hasSubmenu?: boolean
   onClick?: () => void
 }
 
-function MenuSection({ title, subtitle, backgroundImage, hasGoldBorder = true, onClick }: MenuSectionProps) {
+function MenuSection({ title, subtitle, backgroundImage, hasGoldBorder = true, isExpanded = false, hasSubmenu = false, onClick }: MenuSectionProps) {
   return (
     <div
       onClick={onClick}
@@ -29,10 +31,51 @@ function MenuSection({ title, subtitle, backgroundImage, hasGoldBorder = true, o
         <div>
           <h3 className="text-white font-light text-xl md:text-2xl tracking-wider uppercase">{title}</h3>
           <span className="text-amber-500 text-xs md:text-sm tracking-widest uppercase flex items-center gap-2 mt-1">
-            {subtitle} <ChevronRight className="w-4 h-4" />
+            {subtitle} {!hasSubmenu && <ChevronRight className="w-4 h-4" />}
           </span>
         </div>
-        <ChevronRight className="w-6 h-6 text-amber-500/50 group-hover:text-amber-500 transition-colors" />
+        {hasSubmenu ? (
+          isExpanded ? (
+            <ChevronUp className="w-6 h-6 text-amber-500 transition-colors" />
+          ) : (
+            <ChevronDown className="w-6 h-6 text-amber-500/50 group-hover:text-amber-500 transition-colors" />
+          )
+        ) : (
+          <ChevronRight className="w-6 h-6 text-amber-500/50 group-hover:text-amber-500 transition-colors" />
+        )}
+      </div>
+    </div>
+  )
+}
+
+interface SubmenuProps {
+  items: { label: string; id: string }[]
+  onNavigate: (page: string) => void
+  viewAllLabel?: string
+  viewAllPage?: string
+}
+
+function Submenu({ items, onNavigate, viewAllLabel, viewAllPage }: SubmenuProps) {
+  return (
+    <div className="bg-black/95 border-l-2 border-amber-500/50 animate-in fade-in slide-in-from-top-2 duration-300">
+      <div className="py-4 px-6 space-y-1">
+        {items.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => onNavigate(item.id)}
+            className="block w-full text-left text-white/60 text-sm tracking-[0.15em] hover:text-amber-500 transition-colors py-2 pl-4 border-l border-transparent hover:border-amber-500/50"
+          >
+            {item.label}
+          </button>
+        ))}
+        {viewAllLabel && viewAllPage && (
+          <button
+            onClick={() => onNavigate(viewAllPage)}
+            className="mt-4 px-6 py-2 border border-amber-500/50 text-amber-500 text-xs tracking-widest hover:bg-amber-500 hover:text-black transition-all duration-300 w-full"
+          >
+            {viewAllLabel}
+          </button>
+        )}
       </div>
     </div>
   )
@@ -44,10 +87,33 @@ interface MenuProps {
 
 export default function Menu({ onNavigate }: MenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [expandedSection, setExpandedSection] = useState<string | null>(null)
+
+  const signatureEvents = [
+    { label: "BABADOOK", id: "babadook" },
+    { label: "LUNA LLENA", id: "luna-llena" },
+    { label: "LA FESTA", id: "la-festa" },
+    { label: "ANIMAL", id: "animal" },
+    { label: "CELESTIAL", id: "celestial" },
+    { label: "CHAMPIONSHIP", id: "championship" },
+  ]
+
+  const universeItems = [
+    { label: "DRIP", id: "drip" },
+    { label: "VISION GALLERY", id: "vision-gallery" },
+    { label: "CAMP", id: "camp" },
+    { label: "MAISON SWIM", id: "maison-swim" },
+    { label: "GOLDEN BACKSTAGE", id: "golden-backstage" },
+  ]
 
   const handleNavigate = (page: string) => {
     setIsMenuOpen(false)
+    setExpandedSection(null)
     onNavigate?.(page)
+  }
+
+  const toggleSection = (section: string) => {
+    setExpandedSection(expandedSection === section ? null : section)
   }
 
   return (
@@ -105,20 +171,41 @@ export default function Menu({ onNavigate }: MenuProps) {
 
       {/* Menu Sections */}
       <section className="relative z-10 -mt-20">
+        {/* SIGNATURE EVENTS - Expandable */}
         <MenuSection
           title="SIGNATURE EVENTS"
           subtitle="DISCOVER"
           backgroundImage="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=70"
-          onClick={() => handleNavigate("events")}
+          hasSubmenu={true}
+          isExpanded={expandedSection === "events"}
+          onClick={() => toggleSection("events")}
         />
+        {expandedSection === "events" && (
+          <Submenu
+            items={signatureEvents}
+            onNavigate={handleNavigate}
+            viewAllLabel="VIEW ALL EVENTS"
+            viewAllPage="events"
+          />
+        )}
 
+        {/* 1 OF 1 UNIVERSE - Expandable */}
         <MenuSection
           title="1 OF 1 UNIVERSE"
           subtitle="EXPLORE"
           backgroundImage="https://images.unsplash.com/photo-1574391884720-bbc3740c59d1?w=800&q=70"
-          onClick={() => handleNavigate("drip")}
+          hasSubmenu={true}
+          isExpanded={expandedSection === "universe"}
+          onClick={() => toggleSection("universe")}
         />
+        {expandedSection === "universe" && (
+          <Submenu
+            items={universeItems}
+            onNavigate={handleNavigate}
+          />
+        )}
 
+        {/* BUY TICKETS - Direct navigation */}
         <MenuSection
           title="BUY TICKETS / BOOK VIP"
           subtitle="GET ACCESS"
@@ -126,6 +213,7 @@ export default function Menu({ onNavigate }: MenuProps) {
           onClick={() => handleNavigate("buy-tickets")}
         />
 
+        {/* CONTACT - Direct navigation */}
         <MenuSection
           title="CONTACT"
           subtitle="CONNECT"
